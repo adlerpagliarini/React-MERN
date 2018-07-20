@@ -1,0 +1,5 @@
+npm i express body-parser mongoose concurrently
+npm i -D nodemon
+parm -D to dev dependencies
+concurrently - to run more than one npm script, like to run front and back-end at the same time
+

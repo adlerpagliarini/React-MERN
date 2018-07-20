@@ -1,0 +1,21 @@
+{
+  "name": "learn-mern-stack-with-traversymedia",
+  "version": "1.0.0",
+  "description": "Shopping list build with the MERN stack follwing Traversy Media on Youtube",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "author": "Adler Pagliarini",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "concurrently": "^3.6.0",
+    "express": "^4.16.3",
+    "mongoose": "^5.2.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.3"
+  }
+}
