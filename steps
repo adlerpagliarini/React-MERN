@@ -3,3 +3,7 @@ npm i -D nodemon
 parm -D to dev dependencies
 concurrently - to run more than one npm script, like to run front and back-end at the same time
 
+create-react-app
+npm i bootstrap reactstrap uuid react-transition-group
+
+uuid -> generate random ids to insert into database
