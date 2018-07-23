@@ -7,3 +7,6 @@ create-react-app
 npm i bootstrap reactstrap uuid react-transition-group
 
 uuid -> generate random ids to insert into database
+
+Installing Redux
+npm i redux react-redux redux-thunk 
