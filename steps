@@ -13,3 +13,9 @@ npm i redux react-redux redux-thunk
 
 Installing Axios to http requests
 npm install axios
+
+Set UP Heroku
+Install Heroku CLI.exe on the website
+
+heroku login
+heroku create
