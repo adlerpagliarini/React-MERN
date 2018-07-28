@@ -10,3 +10,6 @@ uuid -> generate random ids to insert into database
 
 Installing Redux
 npm i redux react-redux redux-thunk 
+
+Installing Axios to http requests
+npm install axios

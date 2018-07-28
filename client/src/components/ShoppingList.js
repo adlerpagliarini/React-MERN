@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap'
+import { Container, ListGroup, ListGroupItem, Button, Progress } from 'reactstrap'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 import { connect } from 'react-redux';
@@ -19,6 +19,10 @@ class ShoppingList extends Component {
             { id: uuid(), name: 'item 5' }
         ]
     }*/
+
+    state = {
+        value: 0
+    }
 
     onDeleteClick = (id) => {
         this.props.deleteItem(id); // will go to actions
@@ -41,28 +45,28 @@ class ShoppingList extends Component {
             <Container>
                 <ListGroup>
                     <TransitionGroup className="shoppig-list">
-                    {items.map(({id, name, editing}) => (
+                    {items.map(({id, name}) => (
                         <CSSTransition key={id} timeout={500} classNames="fade">
-                        <ListGroupItem>
-                            <Button className="remove-btn" color="danger" size="sm"
-                                    onClick={this.onDeleteClick.bind(this, id)}
-                                    /*onClick={() => {
-                                        this.setState(state => ({
-                                            items: state.items.filter(item => item.id !== id)
-                                        }))
-                                    }}*/
-                            >Delete</Button>
-                            <Button className="edit-btn" color="warning" size="sm"
-                                    onClick={this.onEditClick.bind(this, id)}
-                            >Modify</Button>
-                            {name}
-                            {/*
-                                In that way I can pass a property 'post' with value 'id' and access it on
-                                ItemModalEdit component such as console.log('EDIT ITEM:', this.props.post);
-                                {editing ? <ItemModalEdit post={id} key={id} /> : 'editing' } 
-                            */}
-                        </ListGroupItem>
-                    </CSSTransition>
+                            <ListGroupItem>
+                                <Button className="remove-btn" color="danger" size="sm"
+                                        onClick={this.onDeleteClick.bind(this, id)}
+                                        /*onClick={() => {
+                                            this.setState(state => ({
+                                                items: state.items.filter(item => item.id !== id)
+                                            }))
+                                        }}*/
+                                >Delete</Button>
+                                <Button className="edit-btn" color="warning" size="sm"
+                                        onClick={this.onEditClick.bind(this, id)}
+                                >Modify</Button>
+                                {name}
+                                {/*
+                                    In that way I can pass a property 'post' with value 'id' and access it on
+                                    ItemModalEdit component such as console.log('EDIT ITEM:', this.props.post);
+                                    {editing ? <ItemModalEdit post={id} key={id} /> : 'editing' } 
+                                */}
+                            </ListGroupItem>
+                        </CSSTransition>
                     ))}
                     </TransitionGroup>
                 </ListGroup>

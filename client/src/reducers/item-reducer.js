@@ -1,4 +1,4 @@
-import { CREATE_ITEM, EDIT_ITEM, UPDATE_ITEM, DELETE_ITEM, GET_ITEMS } from '../actions/item-types';
+import { CREATE_ITEM, EDIT_ITEM, UPDATE_ITEM, DELETE_ITEM, GET_ITEMS, ITEMS_LOADING } from '../actions/item-types';
 
 import uuid from 'uuid';
 
@@ -10,14 +10,20 @@ const initialState = {
             { id: uuid(), name: 'item 4 reducer'},
             { id: uuid(), name: 'item 5 reducer'}
     ],
-    item: null
+    item: null,
+    loading: false
 };
 
 export default function (state = initialState, {type, payload}) { //function itemReducer(state = [], action) {
 	switch (type){ //switch (action.type){
         case GET_ITEMS:
             return {
-                ...state
+                ...state,
+                items: [...payload.map((obj) => 
+                        {//obj._id ? { ...obj, id: obj._id, name: obj.name } : obj
+                            return { id: obj._id, name: obj.name}
+                        }), ...state.items],
+                loading: false
             };  
         case CREATE_ITEM:
             return {
@@ -48,7 +54,13 @@ export default function (state = initialState, {type, payload}) { //function ite
                 ...state,
                 items: state.items.filter(item => item.id !== payload),
                 item: null
-            };      
+            };   
+        case ITEMS_LOADING:{
+            return{
+                ...state,
+                loading: true
+            }
+        }   
         default:
             return state;
 	}
