@@ -19,3 +19,4 @@ Install Heroku CLI.exe on the website
 
 heroku login
 heroku create
+git push heroku master
