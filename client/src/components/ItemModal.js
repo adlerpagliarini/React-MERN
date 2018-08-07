@@ -4,9 +4,8 @@ import {
     Form, FormGroup, Label, Input
 } from 'reactstrap';
 import { connect } from 'react-redux';
-import { createItem, updateItem } from '../actions/item-actions';
+import { createItem } from '../actions/item-actions';
 import PropTypes from 'prop-types';
-//import uuid from 'uuid';
 
 class ItemModal extends Component{
     state = {
@@ -16,20 +15,20 @@ class ItemModal extends Component{
 
     toggle = () => {
         this.setState({
-            modal: !this.state.modal
+            modal: !this.state.modal,
+            name: ''
         });
     }
 
     onChange = (e) => {
-        //this.setState(e.target.value);
         this.setState({ [e.target.name]: e.target.value });
     }
 
     onSubmit = (e) => {
         e.preventDefault();
+
         const newItem = {
-            //id: uuid(),
-            name: this.state.name
+            name: this.getName.props.value || ' '
         }
 
         // Add item
@@ -55,7 +54,7 @@ class ItemModal extends Component{
                             <FormGroup>
                                 <Label for="item">Item</Label>
                                 <Input type="text" name="name" id="item" placeholder="Add shopping item" 
-                                       onChange={this.onChange} />
+                                       onChange={this.onChange} ref={(input) => this.getName = input} value={this.state.name}/>
                             </FormGroup>
                             <FormGroup>
                                 <Button color="dark"style={{ marginBottom: '2rem' }} block>Add Item</Button>

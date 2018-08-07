@@ -10,26 +10,26 @@ import PropTypes from 'prop-types';
 class ItemModalEdit extends Component{
     state = {
         modal: false,
-        id: '',
+        _id: '',
         name: ''
     }
 
     toggle = () => {
         this.setState({
-            modal: !this.state.modal
+            modal: !this.state.modal,
+            _id: '',
+            name: ''
         });
     }
 
     onChange = (e) => {
-        //this.setState(e.target.value);
-        console.log({ [e.target.name]: e.target.value });
         this.setState({ [e.target.name]: e.target.value });
     }
 
     onSubmit = (e) => {
         e.preventDefault();
 
-        const changedItem = { id: this.state.id, name: this.getName.props.value }
+        const changedItem = { _id: this.state._id, name: this.getName.props.value || ' ' }
 
         // Edit item
         this.props.updateItem(changedItem);
@@ -43,41 +43,15 @@ class ItemModalEdit extends Component{
         console.log('ItemModelEdit: componentWillReceiveProps: Old Props State: ', this.props, this.props.itemObj.item);
         console.log('ItemModelEdit: componentWillReceiveProps: nextProps: ', nextProps);
         console.log(arguments);
-        /*
-        const editItem = this.props.itemObj.item; 
-            Just works on the second click,
-            because on the second click the props already going to have the item to be modified.
-        */
+
         const editItem = nextProps.itemObj.item; 
+        console.log(JSON.stringify(editItem));
         if(editItem){
             this.toggle();
-            this.setState({ id: editItem.id, name: editItem.name });
+            this.setState({ _id: editItem._id, name: editItem.name });
         }
     }
-
-    /*Going to work same as componentWillReceiveProps, but I will need to have the store imported here
-    //import store from '../store/store';
-
-        componentWillMount(){  //https://stackoverflow.com/questions/45606763/call-component-method-on-action-from-other-component
-            this.unsubscribe = store.subscribe(this.onStoreChange);
-            console.log('ItemModelEdit: componentWillMount: ', this.props);
-        }
-
-        componentWillUnmount(){
-            this.unsubscribe();
-        }
-
-        onStoreChange = () => {
-            console.log('ItemModelEdit: onStoreChange: Old Props State: ', this.props, this.props.itemObj.item);
-            console.log('ItemModelEdit: onStoreChange: New Store State: ', store.getState(), store.getState().ItemReducer.item);
-
-            const editItem = store.getState().ItemReducer.item;
-            if(editItem){
-                this.toggle();
-                this.setState({ id: editItem.id, name: editItem.name });
-            }
-        }
-    */
+    
     render(){
         return(
             <div>
@@ -87,7 +61,7 @@ class ItemModalEdit extends Component{
                         <Form onSubmit={this.onSubmit}>
                             <FormGroup>
                                 <Label for="item">Item ID</Label>
-                                <Input type="text" name="id" id="item" placeholder="Item ID" readOnly defaultValue={this.state.id} />
+                                <Input type="text" name="_id" id="item" placeholder="Item ID" readOnly defaultValue={this.state._id} />
                             </FormGroup>
                             <FormGroup>
                                 <Label for="item">Item Description</Label>

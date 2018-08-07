@@ -7,20 +7,14 @@ export const getItems = () => dispatch => { //dispatch can be used here because 
     axios.get('/api/items')
           .then( res => dispatch( { type: GET_ITEMS, payload: res.data } ));
 
-    /*
-    return { type: GET_ITEMS //will go to reducer and return the data };
-    */
 }
 
 export const createItem = (item) => dispatch => {
 
   axios.post('/api/items', item).then(res => dispatch({
-    type: CREATE_ITEM, payload: { id: res.data._id, name: res.data.name }
+    type: CREATE_ITEM, payload: { _id: res.data._id, name: res.data.name }
   }));
-  
-  /*
-  return { type: CREATE_ITEM, payload: item };
-  */
+
 }
 
 export const deleteItem = (id) => dispatch => {
@@ -30,32 +24,30 @@ export const deleteItem = (id) => dispatch => {
   }))
   .catch(dispatch({type: DELETE_ITEM, payload: id}));
 
-  /*
-  return { type: DELETE_ITEM, payload: id };
-  */
 }
 
 export const editItem = (id) => {
+
   return {
     type: EDIT_ITEM,
     payload: id
   };
+
 }
 
 export const updateItem = (item) => dispatch => {
 
-  axios.put(`/api/items/${item.id}`, item).then(res => dispatch({
-    type: UPDATE_ITEM, payload: { id: res.data._id, name: res.data.name }
+  axios.put(`/api/items/${item._id}`, item).then(res => dispatch({
+    type: UPDATE_ITEM, payload: { _id: res.data._id, name: res.data.name }
   }))
   .catch(dispatch({type: UPDATE_ITEM, payload: item}));
 
-  /*
-  return { type: UPDATE_ITEM, payload: item };
-  */
 }
 
 export const setItemsLoading = () => {
+
   return {
     type: ITEMS_LOADING
   };
+  
 }

@@ -8,7 +8,6 @@ class AppNavbar extends Component {
     state = { isOpen: false }
     constructor(props) {
         super(props);
-        //this.state = { isOpen: false }
         this.toggleHavToBeenBined = this.toggleHavToBeenBined.bind(this);
     }
 
